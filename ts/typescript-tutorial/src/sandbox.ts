@@ -27,3 +27,4 @@ logDetails = (ninja: {name: string, age: number}) => {
 
 const res = calc(1, 3, 'add')
 console.log(res)
+
