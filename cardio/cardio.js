@@ -4,6 +4,18 @@ const reverse = (str) => {
 
   return result;
 };
+const maxChar = (str) => {
+  const arr = str.split('');
+  let count = {};
+  for (let i = 0; i < arr.length; i++) {
+    if (count[arr[i]]) {
+      count[arr[i]]++;
+    } else {
+      count[arr[i]] = 1;
+    }
+  }
 
-const output = reverse('oyinkan');
+  return count;
+};
+const output = maxChar('javascript');
 console.log(output);
