@@ -1,0 +1,11 @@
+{
+  "name": "gql-server",
+  "version": "1.0.0",
+  "description": "backend for graphql serve",
+  "main": "index.js",
+  "author": "shady-codes",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
