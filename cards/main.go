@@ -1,10 +1,13 @@
 package main
+
 import "fmt"
 
-func main(){
+func main() {
+	mybill := newBill(("mario's"))
 
-	var names = [3]int{1,2,3}
-	ranges:=names[:2]
+	mybill.updateTip(10.00)
+	mybill.addItem("onion", 10)
 
-	fmt.Printf("names %T", ranges)
+	fmt.Println(mybill.format())
+
 }
