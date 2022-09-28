@@ -3,11 +3,14 @@ package main
 import "fmt"
 
 func main() {
-	mybill := newBill(("mario's"))
+	// mybill := newBill(("mario's"))
 
-	mybill.updateTip(10.00)
-	mybill.addItem("onion", 10)
+	// mybill.updateTip(10.00)
+	// mybill.addItem("onion", 10)
 
-	fmt.Println(mybill.format())
+	// fmt.Println(mybill.format())
 
+	card := newCard("five of Diamonds")
+
+	fmt.Print(card)
 }
