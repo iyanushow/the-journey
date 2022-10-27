@@ -6,7 +6,7 @@ func newCard(cardName string) string {
 
 	var cards = []string{"age"}
 
-	for i, card := range cards {
+	for _, card := range cards {
 
 		return card
 	}
