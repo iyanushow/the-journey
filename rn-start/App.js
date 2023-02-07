@@ -1,31 +1,46 @@
 import { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+	Button,
+	FlatList,
+	ScrollView,
+	StyleSheet,
+	Text,
+	TextInput,
+	View,
+} from "react-native";
+import GoalInput from "./components/GoalInput";
+import GoalItem from "./components/GoalItem";
 
 export default function App() {
-	const [text, setText] = useState("");
 	const [courseGoals, setCourseGoals] = useState([]);
+	const [isOpen, setIsOpen] = useState(false);
 
-	function inputHandler(text) {
-		setText(text);
+	function addGoalHandler(text) {
+		setCourseGoals(prev => [...prev, text]);
 	}
 
-	function addGoalHandler() {
-		setCourseGoals(prev => [...prev, text]);
+	function deleteItem(goal) {
+		setCourseGoals(prevGoals =>
+			prevGoals.filter(currGoal => currGoal !== goal)
+		);
 	}
 
 	return (
 		<View style={styles.container}>
-			<View style={styles.inputContainer}>
-				<TextInput
-					placeholder="Your course goal"
-					style={styles.textInput}
-					onChangeText={inputHandler}
-				/>
+			<Button
+				title="Add new Goal"
+				color="#5e0acc"
+				onPress={() => setIsOpen(true)}
+			/>
+			<GoalInput isOpen={isOpen} onAddGoal={addGoalHandler} />
 
-				<Button title="Add Goal" onPress={addGoalHandler} />
-			</View>
 			<View style={styles.goalsContainer}>
-				<Text>List of goals ....</Text>
+				<FlatList
+					data={courseGoals}
+					renderItem={({ item }) => (
+						<GoalItem text={item} onDelete={deleteItem} id={item} />
+					)}
+				/>
 			</View>
 		</View>
 	);
@@ -38,25 +53,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 
-	inputContainer: {
-		flex: 1,
-		flexDirection: "row",
-		justifyContent: "space-between",
-		alignItems: "center",
-		marginBottom: 24,
-		borderBottomWidth: 1,
-		borderBottomColor: "#ccc",
-	},
-
-	textInput: {
-		borderWidth: 1,
-		borderColor: "#cccccc",
-		width: "70%",
-		marginRight: 8,
-		padding: 8,
-		borderRadius: 6,
-	},
 	goalsContainer: {
-		flex: 4,
+		flex: 5,
 	},
 });
