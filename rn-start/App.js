@@ -17,6 +17,7 @@ export default function App() {
 
 	function addGoalHandler(text) {
 		setCourseGoals(prev => [...prev, text]);
+		setIsOpen(false);
 	}
 
 	function deleteItem(goal) {
@@ -32,7 +33,11 @@ export default function App() {
 				color="#5e0acc"
 				onPress={() => setIsOpen(true)}
 			/>
-			<GoalInput isOpen={isOpen} onAddGoal={addGoalHandler} />
+			<GoalInput
+				isOpen={isOpen}
+				onAddGoal={addGoalHandler}
+				closeModal={() => setIsOpen(false)}
+			/>
 
 			<View style={styles.goalsContainer}>
 				<FlatList
