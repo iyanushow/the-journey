@@ -1,5 +1,6 @@
 import React from "react";
 import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 export default function PrimaryBtn({ children, onPress, className }) {
 	return (
@@ -10,7 +11,7 @@ export default function PrimaryBtn({ children, onPress, className }) {
 					pressed && Platform.OS === "ios" && styles.pressed,
 				]}
 				onPress={onPress}
-				android_ripple={{ color: "#640233" }}
+				android_ripple={{ color: Colors.primary["400"] }}
 			>
 				<Text style={styles.btnText}>{children}</Text>
 			</Pressable>
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
 	},
 
 	btnContainer: {
-		backgroundColor: "#72063c",
+		backgroundColor: Colors.primary["500"],
 		paddingVertical: 8,
 		paddingHorizontal: 16,
 		elevation: 2,

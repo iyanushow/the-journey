@@ -1,24 +1,50 @@
-import React from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import React, { useState } from "react";
+import { Alert, StyleSheet, TextInput, View } from "react-native";
 import PrimaryBtn from "../components/PrimaryBtn";
+import { Colors } from "../utils/colors";
 
-export default function StartGame() {
+export default function StartGame({ onConfirmNumber }) {
+	const [number, setNumber] = useState("");
+
+	function resetHandler() {
+		setNumber("");
+	}
+
+	function confirmHandler() {
+		const chosenNumber = parseInt(number);
+
+		if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
+			return Alert.alert(
+				"Invalid Number!",
+				"Entered value has to be a number between 0 and 99",
+				[
+					{
+						text: "Close",
+						style: "cancel",
+						onPress: resetHandler,
+					},
+				]
+			);
+		}
+
+		onConfirmNumber(chosenNumber);
+	}
+
 	return (
 		<View style={styles.inputContainer}>
 			<TextInput
 				style={styles.textInput}
 				maxLength={2}
 				keyboardType={"number-pad"}
+				value={number}
+				onChangeText={number => setNumber(number)}
 			/>
 			<View style={styles.btnContainer}>
-				<PrimaryBtn onPress={() => console.log("reset")} className={styles.btn}>
+				<PrimaryBtn onPress={resetHandler} className={styles.btn}>
 					Reset
 				</PrimaryBtn>
 
-				<PrimaryBtn
-					onPress={() => console.log("Confirm")}
-					className={styles.btn}
-				>
+				<PrimaryBtn onPress={confirmHandler} className={styles.btn}>
 					Confirm
 				</PrimaryBtn>
 			</View>
@@ -33,7 +59,7 @@ const styles = StyleSheet.create({
 		marginTop: 100,
 		marginHorizontal: 24,
 		borderRadius: 8,
-		backgroundColor: "#3b001d",
+		backgroundColor: Colors.primary["200"],
 		elevation: 10,
 		shadowColor: "black",
 		shadowRadius: 6,
@@ -45,9 +71,9 @@ const styles = StyleSheet.create({
 		height: 50,
 		width: 50,
 		fontSize: 32,
-		borderBottomColor: "#ddb52f",
+		borderBottomColor: Colors.secondary["100"],
 		borderBottomWidth: 2,
-		color: "#ddb52f",
+		color: Colors.secondary["100"],
 		marginVertical: 8,
 		fontWeight: "bold",
 		textAlign: "center",
